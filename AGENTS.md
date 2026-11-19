@@ -28,3 +28,7 @@ use the editor.
   own key and store it in Secrets.
 - **Secrets.** Lovable manages them. Do not put secret values in the repo.
 <!-- LOVABLE:END -->
+
+## Project Architecture
+- Use TanStack Start file routes and shared components under `src/components`; it is the installed router and keeps SSR route metadata consistent.
+- Keep public ministry content in Lovable Cloud tables, with anonymous access limited to published articles and visible management profiles.
