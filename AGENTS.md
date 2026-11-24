@@ -32,3 +32,4 @@ use the editor.
 ## Project Architecture
 - Use TanStack Start file routes and shared components under `src/components`; it is the installed router and keeps SSR route metadata consistent.
 - Keep public ministry content in Lovable Cloud tables, with anonymous access limited to published articles and visible management profiles.
+- Wrap public file routes in the shared ministry shell and article/profile provider at the root so navigation and published content stay consistent across pages.
