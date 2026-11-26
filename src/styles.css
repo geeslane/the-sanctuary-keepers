@@ -299,8 +299,8 @@ html { box-sizing: border-box; }
 .sticky-list a, .in-page-nav a { display: inline-flex; align-items: center; min-height: 2.5rem; padding: .45rem .8rem; border: 1px solid var(--border); border-radius: 2rem; background: var(--card); color: var(--foreground); text-decoration: none; font-size: .78rem; font-weight: 500; }
 .sticky-list a:hover, .in-page-nav a:hover { border-color: var(--royal); color: var(--royal); }
 .details-column { min-width: 0; }
-.in-page-nav { position: sticky; top: 5.25rem; z-index: 10; display: flex; overflow-x: auto; gap: .5rem; padding: .7rem max(1.25rem, calc((100% - 72rem) / 2)); border-bottom: 1px solid var(--border); background: color-mix(in oklab, var(--background) 94%, transparent); backdrop-filter: blur(14px); }
-.content-section { scroll-margin-top: 8rem; padding-block: 2.75rem; border-bottom: 1px solid var(--border); }
+.in-page-nav { position: sticky; top: 5.25rem; z-index: 30; display: flex; overflow-x: auto; gap: .5rem; padding: .7rem max(1.25rem, calc((100% - 72rem) / 2)); border-bottom: 1px solid var(--border); background: color-mix(in oklab, var(--background) 96%, transparent); backdrop-filter: blur(14px); }
+.content-section { scroll-margin-top: 9.5rem; padding-block: 2.75rem; border-bottom: 1px solid var(--border); }
 .content-section h2 { margin: 0 0 1.1rem; color: var(--navy); font: 600 1.85rem/1.25 var(--font-display); }
 .content-section p { color: var(--muted-foreground); line-height: 1.8; }
 .roman-list { display: grid; gap: .8rem; padding: 0; list-style: none; }
@@ -437,7 +437,7 @@ html { box-sizing: border-box; }
 .floating-whatsapp svg { width: 1.7rem; height: 1.7rem; display: block; }
 .back-to-top { position: fixed; right: 1.25rem; bottom: 4.85rem; z-index: 34; display: grid; width: 2.5rem; aspect-ratio: 1; place-items: center; transform: rotate(180deg); border: 1px solid var(--border); border-radius: 50%; background: var(--card); color: var(--navy); cursor: pointer; box-shadow: 0 6px 18px color-mix(in oklab, var(--navy) 14%, transparent); }
 .fade-up { animation: fade-up .7s both; }
-@keyframes fade-up { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fade-up { from { opacity: 0; } to { opacity: 1; } }
 @keyframes shimmer { 50% { opacity: .48; } }
 
 @media (min-width: 640px) {
@@ -477,7 +477,9 @@ html { box-sizing: border-box; }
 }
 @media (max-width: 700px) {
   main { padding-left: 1.25rem; padding-right: 1.25rem; }
-  .page-header, .hero, .cta-band { margin-left: -1.25rem; margin-right: -1.25rem; }
+  .page-header, .hero, .cta-band, .in-page-nav { margin-left: -1.25rem; margin-right: -1.25rem; }
+  .in-page-nav { top: 4.5rem; padding-inline: 1.25rem; }
+  .content-section { scroll-margin-top: 8.5rem; }
   .hero .hero-content { padding-left: 1.5rem; padding-right: 1.5rem; }
   .hero h1 { max-width: 100%; }
   .cta-band { padding-block: 2.75rem; padding-inline: 1.5rem; }
