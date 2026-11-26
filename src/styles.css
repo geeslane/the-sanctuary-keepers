@@ -284,7 +284,7 @@ html { box-sizing: border-box; }
 .committee-card { scroll-margin-top: 7rem; padding: 1.4rem; border: 1px solid var(--border); background: var(--card); border-radius: .5rem; box-shadow: 0 10px 28px color-mix(in oklab, var(--navy) 5%, transparent); transition: transform .25s ease, box-shadow .25s ease; }
 .committee-card:hover, .post-card:hover, .team-card:hover { transform: translateY(-3px); box-shadow: 0 15px 30px color-mix(in oklab, var(--navy) 10%, transparent); }
 .committee-card h2 { margin: 1rem 0 .45rem; color: var(--navy); font: 600 1.22rem/1.3 var(--font-display); }
-.committee-card > p { display: -webkit-box; min-height: 3.5rem; overflow: hidden; color: var(--muted-foreground); font-size: .9rem; line-height: 1.65; -webkit-box-orient: vertical; -webkit-line-clamp: 2; }
+.committee-card > p { display: -webkit-box; min-height: 4.2rem; overflow: hidden; margin: 0 0 1rem; color: var(--muted-foreground); font-size: .9rem; line-height: 1.65; -webkit-box-orient: vertical; -webkit-line-clamp: 3; }
 .committee-detail { scroll-margin-top: 7rem; display: grid; gap: 1.25rem; padding: 1.45rem; border: 1px solid var(--border); border-radius: .55rem; background: var(--card); box-shadow: 0 12px 30px color-mix(in oklab, var(--navy) 5%, transparent); }
 .committee-detail + .committee-detail { margin-top: 1.2rem; }
 .committee-detail-title { display: flex; align-items: center; gap: .9rem; }
@@ -477,9 +477,15 @@ html { box-sizing: border-box; }
 }
 @media (max-width: 700px) {
   main { padding-left: 1.25rem; padding-right: 1.25rem; }
-  .page-header, .hero { margin-left: -1.25rem; margin-right: -1.25rem; }
+  .page-header, .hero, .cta-band { margin-left: -1.25rem; margin-right: -1.25rem; }
   .hero .hero-content { padding-left: 1.5rem; padding-right: 1.5rem; }
   .hero h1 { max-width: 100%; }
+  .cta-band { padding-block: 2.75rem; padding-inline: 1.5rem; }
+  .cta-band-inner { width: 100%; max-width: 100%; margin-inline: 0; padding-inline: 0; gap: 1.1rem; }
+  .cta-band h2 { font-size: 1.45rem; }
+  .committee-card { padding: 1.25rem; }
+  .committee-card h2 { font-size: 1.12rem; }
+  .committee-card > p { min-height: 0; -webkit-line-clamp: 4; }
   .contact-socials { display: grid; grid-template-columns: 1fr 1fr; }
   .container { box-sizing: border-box; width: 100%; max-width: 100%; margin-inline: 0; padding-left: 0; padding-right: 0; }
   .page-header .container, .header-inner, .footer-inner, .footer-bottom { box-sizing: border-box; width: 100%; max-width: 100%; margin-inline: 0; padding-left: 1.25rem; padding-right: 1.25rem; }
@@ -493,10 +499,11 @@ html { box-sizing: border-box; }
   .content-section h2, .committee-detail-title h2 { font-size: 1.45rem; }
   .committee-detail, .report-card, .donate-card, .contact-lead, .vision-card, .roman-list li { padding: 1.1rem; }
   .pull-quote { margin-inline: 0; font-size: 1.15rem; }
-  .hero { min-height: 32rem; }
+  .hero { min-height: calc(100svh - 4.5rem); height: calc(100svh - 4.5rem); }
   .hero h1 { font-size: 1.7rem; line-height: 1.25; }
   .hero-content { max-width: 100%; padding-block: 2.75rem; }
   .hero-actions { gap: .6rem; }
+  .hero-mark { width: 4.25rem; height: 4.25rem; bottom: 1.1rem; }
   .page-header-motif { color: color-mix(in oklab, var(--primary-foreground) 4%, transparent); }
   .page-header-motif::after { position: absolute; inset: 0; content: ""; pointer-events: none; background: radial-gradient(ellipse at 62% 42%, color-mix(in oklab, var(--navy) 88%, transparent) 0%, color-mix(in oklab, var(--navy) 62%, transparent) 46%, transparent 74%); }
   .scripture-block { box-sizing: border-box; width: 100%; max-width: 100%; margin-inline: 0; padding: 1.5rem 1rem; }
