@@ -170,6 +170,8 @@
   :focus-visible { outline: 3px solid var(--ring); outline-offset: 3px; }
 }
 
+html { box-sizing: border-box; }
+*, *::before, *::after { box-sizing: inherit; }
 .container { width: min(100% - 2.5rem, 72rem); margin-inline: auto; }
 .site-header { position: sticky; top: 0; z-index: 40; background: color-mix(in oklab, var(--background) 93%, transparent); backdrop-filter: blur(16px); border-bottom: 1px solid color-mix(in oklab, var(--border) 74%, transparent); }
 .header-inner { width: min(100% - 2.5rem, 80rem); min-height: 5.25rem; margin: auto; display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; }
@@ -309,6 +311,7 @@
 .training-card svg { color: var(--violet); flex: 0 0 auto; }
 .training-card p { margin: 0; font-weight: 600; color: var(--navy); }
 .reading-column { max-width: 48rem; margin-inline: auto; }
+.reading-column .scripture-block { box-sizing: border-box; width: auto; max-width: 100%; margin-inline: 0; }
 .article-copy { font: 400 1.07rem/1.85 var(--font-article); color: var(--foreground); }
 .article-copy p { margin: 0 0 1.35rem; }
 .article-lead { color: var(--navy); font-size: 1.16rem; }
@@ -430,8 +433,9 @@
 .footer-scripture { margin: 1rem 0 .25rem; color: var(--primary-foreground); font: italic 1.1rem/1.5 var(--font-display); }
 .footer-scripture span { color: color-mix(in oklab, var(--primary-foreground) 65%, transparent); font: 400 .72rem var(--font-body); }
 .footer-bottom { display: flex; width: min(100% - 2.5rem, 72rem); flex-wrap: wrap; justify-content: space-between; gap: .6rem; margin: auto; padding-block: 1rem 1.25rem; border-top: 1px solid color-mix(in oklab, var(--primary-foreground) 17%, transparent); color: color-mix(in oklab, var(--primary-foreground) 60%, transparent); font-size: .7rem; }
-.floating-whatsapp { position: fixed; z-index: 35; right: 1rem; bottom: 1rem; display: flex; min-height: 3rem; align-items: center; gap: .5rem; padding: .65rem .9rem; border: 1px solid color-mix(in oklab, var(--primary-foreground) 28%, transparent); border-radius: 2rem; background: var(--royal); color: var(--primary-foreground); text-decoration: none; font-size: .8rem; box-shadow: 0 10px 25px color-mix(in oklab, var(--navy) 24%, transparent); }
-.back-to-top { position: fixed; right: 1.3rem; bottom: 4.9rem; z-index: 34; display: grid; width: 2.5rem; aspect-ratio: 1; place-items: center; transform: rotate(180deg); border: 1px solid var(--border); border-radius: 50%; background: var(--card); color: var(--navy); cursor: pointer; box-shadow: 0 6px 18px color-mix(in oklab, var(--navy) 14%, transparent); }
+.floating-whatsapp { position: fixed; z-index: 35; right: 1rem; bottom: 1rem; display: grid; width: 3.15rem; height: 3.15rem; place-items: center; border-radius: 50%; background: #25d366; color: #fff; text-decoration: none; box-shadow: 0 10px 24px color-mix(in oklab, #128c7e 40%, transparent); }
+.floating-whatsapp svg { width: 1.7rem; height: 1.7rem; display: block; }
+.back-to-top { position: fixed; right: 1.25rem; bottom: 4.85rem; z-index: 34; display: grid; width: 2.5rem; aspect-ratio: 1; place-items: center; transform: rotate(180deg); border: 1px solid var(--border); border-radius: 50%; background: var(--card); color: var(--navy); cursor: pointer; box-shadow: 0 6px 18px color-mix(in oklab, var(--navy) 14%, transparent); }
 .fade-up { animation: fade-up .7s both; }
 @keyframes fade-up { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
 @keyframes shimmer { 50% { opacity: .48; } }
@@ -472,11 +476,34 @@
   .nav-link { padding-inline: .62rem; }
 }
 @media (max-width: 700px) {
+  main { padding-left: 1.25rem; padding-right: 1.25rem; }
+  .page-header, .hero { margin-left: -1.25rem; margin-right: -1.25rem; }
+  .hero .hero-content { padding-left: 1.5rem; padding-right: 1.5rem; }
+  .hero h1 { max-width: 100%; }
+  .contact-socials { display: grid; grid-template-columns: 1fr 1fr; }
+  .container { box-sizing: border-box; width: 100%; max-width: 100%; margin-inline: 0; padding-left: 0; padding-right: 0; }
+  .page-header .container, .header-inner, .footer-inner, .footer-bottom { box-sizing: border-box; width: 100%; max-width: 100%; margin-inline: 0; padding-left: 1.25rem; padding-right: 1.25rem; }
+  .reading-column .scripture-block { width: 100%; max-width: 100%; margin-inline: 0; }
+  .header-inner { min-height: 4.5rem; gap: .75rem; }
+  .brand-name { font-size: .88rem; }
+  .content-band { padding-block: 2.75rem; }
+  .page-header-inner { min-height: 11rem; padding-block: 1.6rem; }
+  .page-header h1 { font-size: clamp(1.85rem, 8vw, 2.45rem); }
+  .content-section { padding-block: 2rem; }
+  .content-section h2, .committee-detail-title h2 { font-size: 1.45rem; }
+  .committee-detail, .report-card, .donate-card, .contact-lead, .vision-card, .roman-list li { padding: 1.1rem; }
+  .pull-quote { margin-inline: 0; font-size: 1.15rem; }
   .hero { min-height: 32rem; }
-  .hero h1 { font-size: 1.9rem; line-height: 1.2; }
-  .hero-content { max-width: 100%; padding-block: 3.25rem; }
-  .scripture-block { width: calc(100% - 1.25rem); padding: 1.5rem 1rem; }
+  .hero h1 { font-size: 1.7rem; line-height: 1.25; }
+  .hero-content { max-width: 100%; padding-block: 2.75rem; }
+  .hero-actions { gap: .6rem; }
+  .page-header-motif { color: color-mix(in oklab, var(--primary-foreground) 4%, transparent); }
+  .page-header-motif::after { position: absolute; inset: 0; content: ""; pointer-events: none; background: radial-gradient(ellipse at 62% 42%, color-mix(in oklab, var(--navy) 88%, transparent) 0%, color-mix(in oklab, var(--navy) 62%, transparent) 46%, transparent 74%); }
+  .scripture-block { box-sizing: border-box; width: 100%; max-width: 100%; margin-inline: 0; padding: 1.5rem 1rem; }
+  .pull-quote { padding-right: 1rem; }
   .scripture-block p { font-size: 1.15rem; }
+  .article-copy, .prose, .footer-column, .donate-contact-list, .page-header h1 { overflow-wrap: break-word; }
+  img, video, iframe { max-width: 100%; }
 }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }

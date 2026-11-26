@@ -17,7 +17,8 @@ function AboutPage() {
     <div className="page-enter">
       <PageHeader title="About Us" crumb="About Us" />
       <section className="content-band">
-        <article className="reading-column article-copy">
+        <div className="container">
+          <article className="reading-column article-copy">
           <h2>The Sanctuary Keepers</h2>
           <blockquote className="pull-quote article-lead">{aboutParagraphs[0]}</blockquote>
           <p>{aboutParagraphs[1]}</p>
@@ -41,7 +42,8 @@ function AboutPage() {
             <Button asChild><Link to="/membership">Become a Member</Link></Button>
             <Button asChild variant="outline"><Link to="/contact">Contact Us</Link></Button>
           </div>
-        </article>
+          </article>
+        </div>
       </section>
     </div>
   );
