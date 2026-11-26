@@ -2,14 +2,14 @@ import { useEffect, useState, type ReactNode } from "react";
 import { Link, useRouterState } from "@tanstack/react-router";
 import {
   ArrowDown, ArrowRight, Bird, BookOpen, ChevronDown, Church, Cross, Facebook,
-  Flame, HandHeart, Heart, Mail, Menu, Music2, Phone, Shield, Sprout, Users,
-  X, type LucideIcon,
+  Flame, HandHeart, Heart, Instagram, Mail, Menu, Music2, Phone, Shield, Sprout, Users,
+  X, Youtube, type LucideIcon,
 } from "lucide-react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { images, imageAlt } from "@/config/images";
-import { APPLICATION_FORM_URL, EMAIL, FACEBOOK_URL, PHONE, PRESIDENT_NAME, SITE_NAME, SITE_SHORT, TAGLINE, WHATSAPP_URL } from "@/config/site";
+import { APPLICATION_FORM_URL, FACEBOOK_URL, INSTAGRAM_URL, PHONE, PRESIDENT_NAME, SITE_NAME, SITE_SHORT, TAGLINE, WHATSAPP_URL, YOUTUBE_URL } from "@/config/site";
 import type { Article, TeamMember } from "@/components/ArticleDataProvider";
 const logoSrc = "/favicon.png";
 
@@ -86,10 +86,18 @@ export function SiteFooter() {
   return (
     <footer className="site-footer">
       <div className="footer-inner">
-        <div className="footer-brand-column"><Brand footer /><p>We support Christian elects and re-disciple backsliders in accordance with Christ's love and biblical principles.</p><a className="footer-social" href={FACEBOOK_URL} target="_blank" rel="noreferrer" aria-label="Visit The Sanctuary Keepers on Facebook"><Facebook size={17} /></a></div>
+        <div className="footer-brand-column">
+          <Brand footer />
+          <p>We support Christian elects and re-disciple backsliders in accordance with Christ's love and biblical principles.</p>
+          <div className="footer-socials">
+            <a className="footer-social" href={FACEBOOK_URL} target="_blank" rel="noreferrer" aria-label="Visit The Sanctuary Keepers on Facebook"><Facebook size={17} /></a>
+            <a className="footer-social" href={INSTAGRAM_URL} target="_blank" rel="noreferrer" aria-label="Visit The Sanctuary Keepers on Instagram"><Instagram size={17} /></a>
+            <a className="footer-social" href={YOUTUBE_URL} target="_blank" rel="noreferrer" aria-label="Visit The Sanctuary Keepers on YouTube"><Youtube size={17} /></a>
+          </div>
+        </div>
         <div className="footer-column"><h2>Quick Links</h2><Link to="/about">Our Story</Link><Link to="/vision-mission">Vision, Mission & Objectives</Link><Link to="/membership">Membership</Link><Link to="/articles">Articles</Link><Link to="/contact">Contact Us</Link></div>
         <div className="footer-column"><h2>Committees</h2><Link to="/committees" hash="membership-committee">Membership Committee</Link><Link to="/committees" hash="media-and-editorial-service-committee">Media and Editorial Service</Link><Link to="/committees" hash="christian-aid-service-committee">Christian Aid Service</Link><Link to="/committees" hash="christian-mediation-committee">Christian Mediation</Link><Link to="/committees" hash="disciplinary-committee">Disciplinary Committee</Link></div>
-        <div className="footer-column footer-contact"><h2>Contact</h2><a href={`tel:${PHONE}`}>{PHONE}</a><a href={WHATSAPP_URL} target="_blank" rel="noreferrer">WhatsApp</a><a href={`mailto:${EMAIL}`}>{EMAIL}</a><p className="footer-scripture">“Be holy, for I am holy.”<br /><span>1 Peter 1:16 (NKJV)</span></p><Link to="/admin" className="admin-link">Admin</Link></div>
+        <div className="footer-column footer-contact"><h2>Contact</h2><a href={`tel:${PHONE}`}>{PHONE}</a><p className="footer-scripture">“Be holy, for I am holy.”<br /><span>1 Peter 1:16 (NKJV)</span></p><Link to="/admin" className="admin-link">Admin</Link></div>
       </div>
       <div className="footer-bottom"><span>© {new Date().getFullYear()} {SITE_NAME}. All rights reserved.</span><span>{TAGLINE}</span></div>
     </footer>

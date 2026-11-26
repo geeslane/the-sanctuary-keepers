@@ -425,7 +425,9 @@ html { box-sizing: border-box; }
 .brand-footer .brand-tagline { color: color-mix(in oklab, var(--primary-foreground) 66%, transparent); }
 .brand-footer .brand-seal { color: color-mix(in oklab, var(--primary-foreground) 90%, transparent); background: color-mix(in oklab, var(--primary-foreground) 10%, transparent); border-color: color-mix(in oklab, var(--primary-foreground) 25%, transparent); }
 .footer-brand-column > p { max-width: 18rem; margin: 1rem 0; color: color-mix(in oklab, var(--primary-foreground) 69%, transparent); font-size: .86rem; line-height: 1.7; }
+.footer-socials { display: flex; flex-wrap: wrap; gap: .55rem; }
 .footer-social { display: grid; width: 2.2rem; aspect-ratio: 1; place-items: center; border: 1px solid color-mix(in oklab, var(--primary-foreground) 30%, transparent); border-radius: 50%; color: var(--primary-foreground); }
+.footer-social:hover { background: color-mix(in oklab, var(--primary-foreground) 12%, transparent); color: var(--primary-foreground); }
 .footer-column { display: grid; align-content: start; gap: .7rem; }
 .footer-column h2 { margin: 0 0 .3rem; color: var(--primary-foreground); font: 600 1.15rem var(--font-display); }
 .footer-column > a:not(.admin-link) { width: fit-content; color: color-mix(in oklab, var(--primary-foreground) 72%, transparent); text-decoration: none; font-size: .81rem; line-height: 1.5; }
