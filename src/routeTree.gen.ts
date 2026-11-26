@@ -10,33 +10,206 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AboutRouteImport } from './routes/about'
+import { Route as AdminRouteImport } from './routes/admin'
+import { Route as CommitteesRouteImport } from './routes/committees'
+import { Route as ContactRouteImport } from './routes/contact'
+import { Route as DonateRouteImport } from './routes/donate'
+import { Route as GetHelpRouteImport } from './routes/get-help'
+import { Route as GospelRouteImport } from './routes/gospel'
+import { Route as ManagementRouteImport } from './routes/management'
+import { Route as MembershipRouteImport } from './routes/membership'
+import { Route as ReportAnIssueRouteImport } from './routes/report-an-issue'
+import { Route as VisionMissionRouteImport } from './routes/vision-mission'
+import { Route as ArticlesIndexRouteImport } from './routes/articles/index'
+import { Route as ArticlesSlugRouteImport } from './routes/articles/$slug'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CommitteesRoute = CommitteesRouteImport.update({
+  id: '/committees',
+  path: '/committees',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DonateRoute = DonateRouteImport.update({
+  id: '/donate',
+  path: '/donate',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GetHelpRoute = GetHelpRouteImport.update({
+  id: '/get-help',
+  path: '/get-help',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GospelRoute = GospelRouteImport.update({
+  id: '/gospel',
+  path: '/gospel',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ManagementRoute = ManagementRouteImport.update({
+  id: '/management',
+  path: '/management',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MembershipRoute = MembershipRouteImport.update({
+  id: '/membership',
+  path: '/membership',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ReportAnIssueRoute = ReportAnIssueRouteImport.update({
+  id: '/report-an-issue',
+  path: '/report-an-issue',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const VisionMissionRoute = VisionMissionRouteImport.update({
+  id: '/vision-mission',
+  path: '/vision-mission',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ArticlesIndexRoute = ArticlesIndexRouteImport.update({
+  id: '/articles/',
+  path: '/articles/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ArticlesSlugRoute = ArticlesSlugRouteImport.update({
+  id: '/articles/$slug',
+  path: '/articles/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/admin': typeof AdminRoute
+  '/committees': typeof CommitteesRoute
+  '/contact': typeof ContactRoute
+  '/donate': typeof DonateRoute
+  '/get-help': typeof GetHelpRoute
+  '/gospel': typeof GospelRoute
+  '/management': typeof ManagementRoute
+  '/membership': typeof MembershipRoute
+  '/report-an-issue': typeof ReportAnIssueRoute
+  '/vision-mission': typeof VisionMissionRoute
+  '/articles/$slug': typeof ArticlesSlugRoute
+  '/articles/': typeof ArticlesIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/admin': typeof AdminRoute
+  '/committees': typeof CommitteesRoute
+  '/contact': typeof ContactRoute
+  '/donate': typeof DonateRoute
+  '/get-help': typeof GetHelpRoute
+  '/gospel': typeof GospelRoute
+  '/management': typeof ManagementRoute
+  '/membership': typeof MembershipRoute
+  '/report-an-issue': typeof ReportAnIssueRoute
+  '/vision-mission': typeof VisionMissionRoute
+  '/articles/$slug': typeof ArticlesSlugRoute
+  '/articles': typeof ArticlesIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/admin': typeof AdminRoute
+  '/committees': typeof CommitteesRoute
+  '/contact': typeof ContactRoute
+  '/donate': typeof DonateRoute
+  '/get-help': typeof GetHelpRoute
+  '/gospel': typeof GospelRoute
+  '/management': typeof ManagementRoute
+  '/membership': typeof MembershipRoute
+  '/report-an-issue': typeof ReportAnIssueRoute
+  '/vision-mission': typeof VisionMissionRoute
+  '/articles/$slug': typeof ArticlesSlugRoute
+  '/articles/': typeof ArticlesIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/admin'
+    | '/committees'
+    | '/contact'
+    | '/donate'
+    | '/get-help'
+    | '/gospel'
+    | '/management'
+    | '/membership'
+    | '/report-an-issue'
+    | '/vision-mission'
+    | '/articles/$slug'
+    | '/articles/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/about'
+    | '/admin'
+    | '/committees'
+    | '/contact'
+    | '/donate'
+    | '/get-help'
+    | '/gospel'
+    | '/management'
+    | '/membership'
+    | '/report-an-issue'
+    | '/vision-mission'
+    | '/articles/$slug'
+    | '/articles'
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/admin'
+    | '/committees'
+    | '/contact'
+    | '/donate'
+    | '/get-help'
+    | '/gospel'
+    | '/management'
+    | '/membership'
+    | '/report-an-issue'
+    | '/vision-mission'
+    | '/articles/$slug'
+    | '/articles/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AboutRoute: typeof AboutRoute
+  AdminRoute: typeof AdminRoute
+  CommitteesRoute: typeof CommitteesRoute
+  ContactRoute: typeof ContactRoute
+  DonateRoute: typeof DonateRoute
+  GetHelpRoute: typeof GetHelpRoute
+  GospelRoute: typeof GospelRoute
+  ManagementRoute: typeof ManagementRoute
+  MembershipRoute: typeof MembershipRoute
+  ReportAnIssueRoute: typeof ReportAnIssueRoute
+  VisionMissionRoute: typeof VisionMissionRoute
+  ArticlesSlugRoute: typeof ArticlesSlugRoute
+  ArticlesIndexRoute: typeof ArticlesIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +221,115 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/committees': {
+      id: '/committees'
+      path: '/committees'
+      fullPath: '/committees'
+      preLoaderRoute: typeof CommitteesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/donate': {
+      id: '/donate'
+      path: '/donate'
+      fullPath: '/donate'
+      preLoaderRoute: typeof DonateRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/get-help': {
+      id: '/get-help'
+      path: '/get-help'
+      fullPath: '/get-help'
+      preLoaderRoute: typeof GetHelpRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/gospel': {
+      id: '/gospel'
+      path: '/gospel'
+      fullPath: '/gospel'
+      preLoaderRoute: typeof GospelRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/management': {
+      id: '/management'
+      path: '/management'
+      fullPath: '/management'
+      preLoaderRoute: typeof ManagementRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/membership': {
+      id: '/membership'
+      path: '/membership'
+      fullPath: '/membership'
+      preLoaderRoute: typeof MembershipRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/report-an-issue': {
+      id: '/report-an-issue'
+      path: '/report-an-issue'
+      fullPath: '/report-an-issue'
+      preLoaderRoute: typeof ReportAnIssueRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/vision-mission': {
+      id: '/vision-mission'
+      path: '/vision-mission'
+      fullPath: '/vision-mission'
+      preLoaderRoute: typeof VisionMissionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/articles/': {
+      id: '/articles/'
+      path: '/articles'
+      fullPath: '/articles/'
+      preLoaderRoute: typeof ArticlesIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/articles/$slug': {
+      id: '/articles/$slug'
+      path: '/articles/$slug'
+      fullPath: '/articles/$slug'
+      preLoaderRoute: typeof ArticlesSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AboutRoute: AboutRoute,
+  AdminRoute: AdminRoute,
+  CommitteesRoute: CommitteesRoute,
+  ContactRoute: ContactRoute,
+  DonateRoute: DonateRoute,
+  GetHelpRoute: GetHelpRoute,
+  GospelRoute: GospelRoute,
+  ManagementRoute: ManagementRoute,
+  MembershipRoute: MembershipRoute,
+  ReportAnIssueRoute: ReportAnIssueRoute,
+  VisionMissionRoute: VisionMissionRoute,
+  ArticlesSlugRoute: ArticlesSlugRoute,
+  ArticlesIndexRoute: ArticlesIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

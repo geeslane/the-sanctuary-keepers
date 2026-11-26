@@ -6,6 +6,8 @@ export const PHONE = "+2348032072216";
 export const WHATSAPP_URL = "https://wa.me/2348032072216";
 export const EMAIL = "president@tskinternational.org";
 export const FACEBOOK_URL = "https://www.facebook.com/thesanctuarykeepers/";
+export const INSTAGRAM_URL = "https://www.instagram.com/thesanctuarykeepers/";
+export const YOUTUBE_URL = "https://www.youtube.com/@thesanctuarykeepers";
 export const APPLICATION_FORM_URL = "http://bit.ly/TSKApplicationForm1";
 export const REPORT_ISSUE_URL = "https://bit.ly/tsk-Report-an-issue";
 // TODO: replace with the Get Help connection link

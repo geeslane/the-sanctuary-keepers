@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
 import { supabase } from "@/integrations/supabase/client";
+import { ARTICLES_CHANGED } from "@/lib/article-admin";
 import type { Tables } from "@/integrations/supabase/types";
 
 export type Article = Tables<"articles">;
@@ -12,16 +13,23 @@ export function ArticleDataProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     let active = true;
-    Promise.all([
-      supabase.from("articles").select("*").eq("published", true).order("published_at", { ascending: false }),
-      supabase.from("team_members").select("*").eq("visible", true).order("sort_order", { ascending: true }),
-    ]).then(([articlesResult, membersResult]) => {
-      if (!active) return;
-      setData({ articles: articlesResult.data ?? [], members: membersResult.data ?? [], loading: false });
-    }).catch(() => {
-      if (active) setData({ articles: [], members: [], loading: false });
-    });
-    return () => { active = false; };
+    const load = () => {
+      Promise.all([
+        supabase.from("articles").select("*").eq("published", true).order("published_at", { ascending: false }),
+        supabase.from("team_members").select("*").eq("visible", true).order("sort_order", { ascending: true }),
+      ]).then(([articlesResult, membersResult]) => {
+        if (!active) return;
+        setData({ articles: articlesResult.data ?? [], members: membersResult.data ?? [], loading: false });
+      }).catch(() => {
+        if (active) setData({ articles: [], members: [], loading: false });
+      });
+    };
+    load();
+    window.addEventListener(ARTICLES_CHANGED, load);
+    return () => {
+      active = false;
+      window.removeEventListener(ARTICLES_CHANGED, load);
+    };
   }, []);
 
   return <DataContext.Provider value={data}>{children}</DataContext.Provider>;

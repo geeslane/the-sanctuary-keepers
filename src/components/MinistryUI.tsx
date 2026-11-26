@@ -1,5 +1,5 @@
 import { useEffect, useState, type ReactNode } from "react";
-import { Link } from "@tanstack/react-router";
+import { Link, useRouterState } from "@tanstack/react-router";
 import {
   ArrowDown, ArrowRight, Bird, BookOpen, ChevronDown, Church, Cross, Facebook,
   Flame, HandHeart, Heart, Mail, Menu, Music2, Phone, Shield, Sprout, Users,
@@ -9,25 +9,22 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { images, imageAlt } from "@/config/images";
-import { EMAIL, FACEBOOK_URL, PHONE, PRESIDENT_NAME, SITE_NAME, SITE_SHORT, TAGLINE, WHATSAPP_URL } from "@/config/site";
+import { APPLICATION_FORM_URL, EMAIL, FACEBOOK_URL, PHONE, PRESIDENT_NAME, SITE_NAME, SITE_SHORT, TAGLINE, WHATSAPP_URL } from "@/config/site";
 import type { Article, TeamMember } from "@/components/ArticleDataProvider";
-import logoAsset from "@/assets/sanctuary-keepers-logo.png.asset.json";
+const logoSrc = "/favicon.png";
 
 const menu = [
   { label: "Home", to: "/" as const },
   { label: "About Us", children: [{ label: "Our Story", to: "/about" as const }, { label: "Vision, Mission & Objectives", to: "/vision-mission" as const }] },
-  { label: "Management", to: "/management" as const },
-  { label: "Membership", children: [{ label: "Requirements", to: "/membership" as const, hash: "requirements" }, { label: "Mode of Application", to: "/membership" as const, hash: "application" }, { label: "Membership Development", to: "/membership" as const, hash: "development" }] },
-  { label: "Committees", to: "/committees" as const },
-  { label: "Gospel", to: "/gospel" as const },
+  { label: "Membership", children: [{ label: "Requirements", to: "/membership" as const, hash: "requirements" }, { label: "Mode of Application", to: "/membership" as const, hash: "application" }, { label: "Committees", to: "/committees" as const }] },
   { label: "Articles", to: "/articles" as const },
-  { label: "More", children: [{ label: "Report an Issue", to: "/report-an-issue" as const }, { label: "Get Help", to: "/get-help" as const }, { label: "Contact", to: "/contact" as const }] },
+  { label: "Contact", to: "/contact" as const },
 ] as const;
 
 export function Brand({ footer = false }: { footer?: boolean }) {
   return (
     <Link to="/" className={`brand group inline-flex items-center gap-2.5 ${footer ? "brand-footer" : ""}`} aria-label={`${SITE_NAME} home`}>
-      <img className="brand-logo" src={logoAsset.url} alt="" />
+      <img className="brand-logo" src={logoSrc} alt="" width={44} height={44} />
       <span className="brand-copy"><span className="brand-name">{SITE_NAME}</span><span className="brand-tagline">{TAGLINE}</span></span>
     </Link>
   );
@@ -35,27 +32,37 @@ export function Brand({ footer = false }: { footer?: boolean }) {
 
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const pathname = useRouterState({ select: (state) => state.location.pathname });
+  useEffect(() => {
+    const update = () => setScrolled(window.scrollY > 8);
+    update();
+    window.addEventListener("scroll", update, { passive: true });
+    return () => window.removeEventListener("scroll", update);
+  }, []);
+  const active = (to: string) => (to === "/" ? pathname === "/" : pathname === to || pathname.startsWith(`${to}/`));
   return (
-    <header className="site-header">
+    <header className={`site-header${scrolled ? " is-scrolled" : ""}`}>
       <a className="skip-link" href="#main-content">Skip to content</a>
       <div className="header-inner">
         <Brand />
         <nav className="desktop-nav" aria-label="Main navigation">
           {menu.map((item) => item.children ? (
             <div className="nav-dropdown" key={item.label}>
-              <button className="nav-link" type="button">{item.label}<ChevronDown size={14} /></button>
-              <div className="dropdown-panel">{item.children.map((child) => <Link key={child.label} to={child.to} {...("hash" in child ? { hash: child.hash } : {})} className="dropdown-link">{child.label}</Link>)}</div>
+              <button className={`nav-link${item.children.some((child) => active(child.to)) ? " is-active" : ""}`} type="button" aria-haspopup="true">{item.label}<ChevronDown size={14} /></button>
+              <div className="dropdown-panel">{item.children.map((child) => <Link key={child.label} to={child.to} {...("hash" in child ? { hash: child.hash } : {})} className={`dropdown-link${active(child.to) ? " is-active" : ""}`} aria-current={active(child.to) ? "page" : undefined}>{child.label}</Link>)}</div>
             </div>
-          ) : <Link key={item.to} to={item.to} className="nav-link">{item.label}</Link>)}
+          ) : <Link key={item.to} to={item.to} className={`nav-link${active(item.to) ? " is-active" : ""}`} aria-current={active(item.to) ? "page" : undefined}>{item.label}</Link>)}
         </nav>
         <div className="header-actions">
+          <Button asChild variant="outline" className="hidden sm:inline-flex"><a href={APPLICATION_FORM_URL} target="_blank" rel="noopener noreferrer">Join Us</a></Button>
           <Button asChild className="donate-button hidden sm:inline-flex"><Link to="/donate">Donate <Heart size={15} /></Link></Button>
           <Sheet open={open} onOpenChange={setOpen}>
             <SheetTrigger asChild><Button variant="outline" size="icon" className="mobile-menu-button lg:hidden" aria-label="Open navigation menu"><Menu /></Button></SheetTrigger>
             <SheetContent side="right" className="mobile-drawer">
               <div className="drawer-heading"><SheetTitle><Brand /></SheetTitle></div>
               <nav className="mobile-nav" aria-label="Mobile navigation">
-                {menu.map((item, index) => item.children ? (
+                {menu.map((item) => item.children ? (
                     <Accordion key={item.label} type="single" collapsible>
                     <AccordionItem value={item.label} className="mobile-accordion-item">
                       <AccordionTrigger>{item.label}</AccordionTrigger>
@@ -63,6 +70,7 @@ export function SiteHeader() {
                     </AccordionItem>
                   </Accordion>
                 ) : <Link key={item.to} to={item.to} onClick={() => setOpen(false)} className="mobile-nav-link">{item.label}</Link>)}
+                <Button asChild variant="outline" className="drawer-donate"><a href={APPLICATION_FORM_URL} target="_blank" rel="noopener noreferrer" onClick={() => setOpen(false)}>Join Us</a></Button>
                 <Button asChild className="donate-button drawer-donate"><Link to="/donate" onClick={() => setOpen(false)}>Donate <Heart size={15} /></Link></Button>
               </nav>
               <p className="drawer-caption">{SITE_SHORT} · {TAGLINE}</p>
@@ -83,7 +91,7 @@ export function SiteFooter() {
         <div className="footer-column"><h2>Committees</h2><Link to="/committees" hash="membership-committee">Membership Committee</Link><Link to="/committees" hash="media-and-editorial-service-committee">Media and Editorial Service</Link><Link to="/committees" hash="christian-aid-service-committee">Christian Aid Service</Link><Link to="/committees" hash="christian-mediation-committee">Christian Mediation</Link><Link to="/committees" hash="disciplinary-committee">Disciplinary Committee</Link></div>
         <div className="footer-column footer-contact"><h2>Contact</h2><a href={`tel:${PHONE}`}>{PHONE}</a><a href={WHATSAPP_URL} target="_blank" rel="noreferrer">WhatsApp</a><a href={`mailto:${EMAIL}`}>{EMAIL}</a><p className="footer-scripture">“Be holy, for I am holy.”<br /><span>1 Peter 1:16 (NKJV)</span></p><Link to="/admin" className="admin-link">Admin</Link></div>
       </div>
-      <div className="footer-bottom"><span>© 2026 {SITE_NAME}. All rights reserved.</span><span>{TAGLINE}</span></div>
+      <div className="footer-bottom"><span>© {new Date().getFullYear()} {SITE_NAME}. All rights reserved.</span><span>{TAGLINE}</span></div>
     </footer>
   );
 }
@@ -115,20 +123,23 @@ export function SectionBand({ children, className = "" }: { children: ReactNode;
 const iconMap: Record<string, LucideIcon> = { users: Users, book: BookOpen, hands: HandHeart, heart: Heart, shield: Shield, church: Church, flame: Flame, bird: Bird, sprout: Sprout, music: Music2 };
 export function TopicIcon({ name, size = 22 }: { name: string; size?: number }) { const Icon = iconMap[name] ?? Cross; return <Icon size={size} strokeWidth={1.55} aria-hidden="true" />; }
 
-export function ObjectiveCard({ numeral, text, compact = false }: { numeral: string; text: string; compact?: boolean }) { return <article className={`objective-card ${compact ? "objective-card-compact" : ""}`}><span className="objective-number">{numeral}</span><p>{text}</p></article>; }
+export function ObjectiveCard({ numeral, text, icon, open = false }: { numeral: string; text: string; icon?: string; open?: boolean }) {
+  return <article className={`objective-card${open ? " objective-card-open" : ""}`}>{icon && <span className="committee-icon"><TopicIcon name={icon} size={18} /></span>}<span className="objective-number">{numeral}</span><p>{text}</p></article>;
+}
 
 export function CommitteeCard({ committee }: { committee: (typeof import("@/lib/ministry-content"))["committees"][number] }) {
   return <article className="committee-card" id={committee.slug}><div className="committee-icon"><TopicIcon name={committee.icon} /></div><h2>{committee.title}</h2><p>{committee.summary}</p><Link to="/committees" hash={committee.slug} className="text-link">Explore committee <ArrowRight size={14} /></Link></article>;
 }
 
-export function ArticleCard({ article, compact = false }: { article: Article; compact?: boolean }) {
-  return <article className={`post-card ${compact ? "post-card-compact" : ""}`}>
-    <Link to="/articles/$slug" params={{ slug: article.slug }} className="post-image-link" aria-label={`Read ${article.title}`}>
+export function ArticleCard({ article, readingTime, authorLabel, action = "Read more" }: { article: Article; readingTime?: string; authorLabel?: string; action?: string }) {
+  const author = authorLabel ?? article.author;
+  return <article className="post-card">
+    <Link to="/articles/$slug" params={{ slug: article.slug }} className="post-image-link">
       {article.cover_image ? <img className="post-image" src={article.cover_image} alt={article.title} loading="lazy" /> : <div className="post-image-placeholder"><BookOpen size={28} /></div>}
       <span className="category-badge">{article.category}</span>
     </Link>
-    <div className="post-copy"><p className="post-date">{article.published_at ? new Date(article.published_at).toLocaleDateString("en", { year: "numeric", month: "long", day: "numeric" }) : ""}{article.author ? ` · ${article.author}` : ""}</p>
-      <h3><Link to="/articles/$slug" params={{ slug: article.slug }}>{article.title}</Link></h3><p className="post-excerpt">{article.excerpt}</p><Link to="/articles/$slug" params={{ slug: article.slug }} className="text-link">Read more <ArrowRight size={15} /></Link></div>
+    <div className="post-copy"><p className="post-date">{article.published_at ? new Date(article.published_at).toLocaleDateString("en", { year: "numeric", month: "long", day: "numeric" }) : ""}{author ? ` · ${author}` : ""}{readingTime ? ` · ${readingTime}` : ""}</p>
+      <h3><Link to="/articles/$slug" params={{ slug: article.slug }}>{article.title}</Link></h3><p className="post-excerpt">{article.excerpt}</p><Link to="/articles/$slug" params={{ slug: article.slug }} className="text-link">{action} <ArrowRight size={15} /></Link></div>
   </article>;
 }
 
